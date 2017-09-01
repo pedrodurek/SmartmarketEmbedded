@@ -1,0 +1,12 @@
+com/smartmarket/events/ProcessPhoto.class
+com/smartmarket/request/RequestSender.class
+com/smartmarket/events/Task.class
+com/smartmarket/utils/FileUtils.class
+com/smartmarket/configuration/Configuration.class
+com/smartmarket/utils/CommandUtils.class
+com/smartmarket/utils/XMLConfig.class
+com/smartmarket/utils/XMLType.class
+com/smartmarket/request/PhotoDTO.class
+com/smartmarket/main/Smartmarket.class
+com/smartmarket/request/ProductDTO.class
+com/smartmarket/events/TakePhoto.class

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<paths>
+		<config>/home/pi/smartmarket/config/config.properties</config>
+		<loadcelloutput>/temp/loadcelloutput.value</loadcelloutput>
+		<pendentphotos>/home/pi/smartmarket/pendent-photos/</pendentphotos>
+	</paths>
+	<urls>
+		<processphoto>http://192.168.0.103:8080/SmartmarketWeb/endpoint/processphoto</processphoto>
+	</urls>
+	<info>
+		<version>1.0</version>
+	</info>
+	<display>
+		
+	</display>
+</configuration>
