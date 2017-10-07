@@ -2,11 +2,11 @@
 <configuration>
 	<paths>
 		<config>/home/pi/smartmarket/config/config.properties</config>
-		<loadcelloutput>/temp/loadcelloutput.value</loadcelloutput>
+		<loadcelloutput>/temp/loadcelloutput%d.value</loadcelloutput>
 		<pendentphotos>/home/pi/smartmarket/pendent-photos/</pendentphotos>
 	</paths>
 	<urls>
-		<processphoto>http://192.168.1.5:8080/SmartmarketWeb/endpoint/processphoto</processphoto>
+		<processphoto>http://192.168.1.5:8080/SmartmarketWeb/endpoint/train/predict</processphoto>
 	</urls>
 	<info>
 		<version>1.0</version>

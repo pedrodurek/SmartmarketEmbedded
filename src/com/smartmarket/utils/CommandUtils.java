@@ -8,7 +8,7 @@ public class CommandUtils {
 		
 		try {
 			
-			Runtime.getRuntime().exec("fswebcam -r 1280x720 --no-banner "+dstDirectory+"/photo1.jpg");
+			Runtime.getRuntime().exec("fswebcam -r 1280x1280 --no-banner "+dstDirectory+"image.jpg");
 				
 		} catch (IOException e) {
 			e.printStackTrace();

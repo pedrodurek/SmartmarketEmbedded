@@ -3,8 +3,8 @@ package com.smartmarket.main;
 import org.apache.log4j.Logger;
 
 import com.smartmarket.configuration.Configuration;
-import com.smartmarket.events.ProcessPhoto;
-import com.smartmarket.events.TakePhoto;
+import com.smartmarket.task.ProcessPhotoTask;
+import com.smartmarket.task.TakePhotoTask;
 import com.smartmarket.utils.XMLConfig;
 import com.smartmarket.utils.XMLType;
 
@@ -21,14 +21,14 @@ public class Smartmarket {
 		config.loadConfiguration();
 		
 		// Initialize take photo task
-		log.info("Initiliaze Take Photo Task");
-		TakePhoto takePhoto = new TakePhoto(config.getIntervalTakePhoto());
+		log.info("Initiliazing Take Photo Task");
+		TakePhotoTask takePhoto = new TakePhotoTask(config.getIntervalTakePhoto());
 		Thread threadTakePhoto = new Thread(takePhoto);
 		threadTakePhoto.start();
 		
 		// Initialize process photo task
-		log.info("Initiliaze Process Photo Task");
-		ProcessPhoto processPhotos = new ProcessPhoto(config.getIntervalProcessPhoto());
+		log.info("Initiliazing Process Photo Task");
+		ProcessPhotoTask processPhotos = new ProcessPhotoTask(config.getIntervalProcessPhoto());
 		Thread threadProcessPhotos = new Thread(processPhotos);
 		threadProcessPhotos.start();
 		

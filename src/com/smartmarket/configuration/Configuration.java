@@ -15,7 +15,6 @@ public class Configuration {
 	private int intervalTakePhoto;
 	private int intervalProcessPhoto;
 	private long rateWeight;
-	private long previousWeight;
 	private long devicesNumber;
 	
 	public static Configuration getInstance() {
@@ -58,14 +57,6 @@ public class Configuration {
 
 	public void setRateWeight(long rateWeight) {
 		this.rateWeight = rateWeight;
-	}
-
-	public long getPreviousWeight() {
-		return previousWeight;
-	}
-
-	public void setPreviousWeight(long previousWeight) {
-		this.previousWeight = previousWeight;
 	}
 
 	public long getDevicesNumber() {

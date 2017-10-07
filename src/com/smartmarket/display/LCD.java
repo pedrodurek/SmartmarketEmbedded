@@ -10,7 +10,6 @@ public class LCD extends I2CLcdDisplay {
 	
 	public LCD(int i2cAdress) throws Exception {
 		super(2, 16, I2CBus.BUS_1, i2cAdress, 3, 0, 1, 2, 7, 6, 5, 4);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void init() {
