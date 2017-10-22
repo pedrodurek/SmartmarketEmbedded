@@ -1,5 +1,7 @@
 package com.smartmarket.task;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 
 import com.smartmarket.configuration.Configuration;
@@ -18,7 +20,7 @@ public class TakePhoto extends Task {
 	
 	public TakePhoto(int indexSensor) {
 		
-		super(1);
+		super(100);
 		this.indexSensor = indexSensor+1;
 		
 	}
@@ -30,21 +32,25 @@ public class TakePhoto extends Task {
 		
 		// Read the current weight detect by the load cell sensor
 		String filePath = String.format(XMLConfig.getConfig(XMLType.LoadCellOutputPath), indexSensor);
-		long currentWeight = FileUtils.readFile(filePath);			
-		if (currentWeight < 0) { // Invalid weight
+		long currentWeight = 0;
+		try {
+			currentWeight = FileUtils.readFile(filePath);
+		} catch (Exception e) {
 			return;
 		}
+		
 		// Calculate the current weight with the previous one from the load cell,
 		// if the difference between the values was higher than the rate configured 
-		// in the config file, take the photo in order to process it and detect the object			
-		if ((Math.abs(currentWeight-previousWeight) > config.getRateWeight())) {
+		// in the config file, take the photo in order to process it and detect the object
+		File file = new File(XMLConfig.getConfig(XMLType.PendentPhotosPath)+"image"+indexSensor+".jpg");
+		if ((Math.abs(currentWeight-previousWeight) > config.getRateWeight()) && !file.exists()) {
 			
 			log.info("Product detected, taking picture");
 			log.info("Index Sensor: "+indexSensor);
-			log.info("Teste: "+previousWeight+" "+currentWeight);
 			CommandUtils.takePicture(XMLConfig.getConfig(XMLType.PendentPhotosPath));
 			FileUtils.cropImage(indexSensor, XMLConfig.getConfig(XMLType.PendentPhotosPath)); 
 			previousWeight = currentWeight; // Update the weight from the load cell
+			
 			
 		}
 		

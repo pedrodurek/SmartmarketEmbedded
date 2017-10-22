@@ -5,7 +5,8 @@ import org.apache.log4j.Logger;
 public class ProcessPhotoTask implements Runnable {
 	
 	private static Logger log =  Logger.getLogger(TakePhotoTask.class.getName());
-	private static int[] addressesLCD = {0x26, 0x27};
+	private static int[] addressesLCD = {0x3f, 0x23, 0x3d, 0x3e};
+//	private static int[] addressesLCD = {0x26, 0x27};
 	
 	private ProcessPhoto processPhoto;
 	

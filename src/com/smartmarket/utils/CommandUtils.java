@@ -1,6 +1,5 @@
 package com.smartmarket.utils;
 
-import java.io.IOException;
 
 public class CommandUtils {
 	
@@ -8,9 +7,11 @@ public class CommandUtils {
 		
 		try {
 			
+			Thread.sleep(2000);
 			Runtime.getRuntime().exec("fswebcam -r 1280x1280 --no-banner "+dstDirectory+"image.jpg");
-				
-		} catch (IOException e) {
+			Thread.sleep(2000);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

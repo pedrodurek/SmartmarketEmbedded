@@ -45,7 +45,7 @@ public class TakePhotoTask extends Task implements Runnable {
 		
 		while (true) {
 			
-			if (System.currentTimeMillis() > (takePhoto.getLastRunTime()+takePhoto.getIntervalTime()*1000) || takePhoto.getLastRunTime() == 0) {
+			if (System.currentTimeMillis() > (takePhoto.getLastRunTime()+takePhoto.getIntervalTime()) || takePhoto.getLastRunTime() == 0) {
 				 
 				takePhoto.runTask();
 				takePhoto.updateLastRunTime();

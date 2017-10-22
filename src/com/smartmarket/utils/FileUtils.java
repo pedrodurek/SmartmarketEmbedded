@@ -14,14 +14,10 @@ import org.apache.log4j.Logger;
 public class FileUtils {
 	
 	private static Logger log =  Logger.getLogger(FileUtils.class.getName());
-	public static long readFile(String fileName) {
+	public static long readFile(String fileName) throws Exception {
 		
 		File file = new File(fileName);
-		try {
-			return Long.parseLong(readFile(file));
-		} catch (Exception e) {
-			return -1;
-		}
+		return Long.parseLong(readFile(file));
 		
 	}
 	
@@ -65,12 +61,12 @@ public class FileUtils {
 		try {
 			
 			File image = new File(folder+"image.jpg");
-			log.info(folder+"image.jpg");
+			BufferedImage SubImgage = null;
 			if (image.exists()) {
 				
 				BufferedImage originalImgage = ImageIO.read(image);
 				int x = originalImgage.getWidth()/2, y = originalImgage.getHeight()/2;
-				
+				int aux = 200;
 				if (slice == 1) {
 					
 					/* --------------
@@ -79,8 +75,7 @@ public class FileUtils {
 					 * -	 -		-
 					 * --------------
 					 * */
-					BufferedImage SubImgage = originalImgage.getSubimage(0, 0, x, y);
-					ImageIO.write(SubImgage, "jpg", new File(folder+"image1.jpg"));
+					SubImgage = originalImgage.getSubimage(aux, 0, x-aux, y);
 					
 				} else if (slice == 2) {
 				
@@ -90,8 +85,7 @@ public class FileUtils {
 					 * -	 -		-
 					 * --------------
 					 * */
-					BufferedImage SubImgage = originalImgage.getSubimage(x, 0, x, y);
-					ImageIO.write(SubImgage, "jpg", new File(folder+"image2.jpg"));
+					SubImgage = originalImgage.getSubimage(x, 0, x-aux, y);
 					
 				} else if (slice == 3) {
 				
@@ -101,8 +95,7 @@ public class FileUtils {
 					 * -  X  -		-
 					 * --------------
 					 * */
-					BufferedImage SubImgage = originalImgage.getSubimage(0, y, x, y);
-					ImageIO.write(SubImgage, "jpg", new File(folder+"image3.jpg"));
+					SubImgage = originalImgage.getSubimage(aux, y, x-aux, y);
 				
 				} else if (slice == 4) {
 					
@@ -112,15 +105,16 @@ public class FileUtils {
 					 * -     -	X	-
 					 * --------------
 					 * */
-					BufferedImage SubImgage = originalImgage.getSubimage(x, y, x, y);
-					ImageIO.write(SubImgage, "jpg", new File(folder+"image4.jpg"));
+					SubImgage = originalImgage.getSubimage(x, y, x-aux, y);
 					
 				}
+				ImageIO.write(SubImgage, "jpg", new File(folder+"image"+slice+".jpg"));
+				Thread.sleep(1000);
 				image.delete();
 				
 			}
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

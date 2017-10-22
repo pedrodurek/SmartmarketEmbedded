@@ -23,6 +23,7 @@ public class ProcessPhoto extends Task {
 	
 	private ProcessPhoto nextTask;
 	private int indexImage;
+//	private int retriesDetect;
 	private LCD lcd;
 	
 	public ProcessPhoto(int address, int indexImage, int intervalTime) {
@@ -52,19 +53,36 @@ public class ProcessPhoto extends Task {
 				log.info("Processing Photo!");
 				byte[] photo = Files.readAllBytes(Paths.get(file.getPath()));
 				photoDto.setPhoto(new String(Base64.getEncoder().encode(photo), "UTF-8"));
+				photoDto.setIndex(indexImage);
 				
 			} catch (IOException e) {
 				log.error("Error reading photo", e);
 			} 
 			RequestSender<PhotoDTO> request = new RequestSender<>();
 			ProductDTO productDto = new Genson().deserialize(request.sendRequest(photoDto, XMLConfig.getConfig(XMLType.ProcessPhotoURL)), ProductDTO.class);
-			lcd.clear();
 			if (productDto != null) {
 				
 				log.info("Updating display...");
 				file.delete();
 				if (productDto.getName() != null && productDto.getName().length() > 0) {
-					lcd.writeProduct(productDto.getName());
+					
+					if (!productDto.getName().equals("breakmode")) {
+						
+						lcd.clear();
+						lcd.writeProduct(productDto.getName());
+						
+					}
+//					int maxRetriesDetect = 3;
+//					retriesDetect++;
+//					if (productDto.getName().equals("Desconhecido") && retriesDetect < maxRetriesDetect) {
+//						
+//						CommandUtils.takePicture(XMLConfig.getConfig(XMLType.PendentPhotosPath));
+//						FileUtils.cropImage(indexImage, XMLConfig.getConfig(XMLType.PendentPhotosPath)); 
+//						
+//					} else {
+//						retriesDetect = 0;
+//					}
+					
 				}
 				if (productDto.getPrice() >= 0.01) {
 					lcd.writePrice(productDto.getPrice());
